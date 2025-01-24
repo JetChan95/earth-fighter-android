@@ -1,27 +1,26 @@
-package com.jetchan.dev.ui.home
+package com.jetchan.dev.ui.organization
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jetchan.dev.R
-import com.jetchan.dev.databinding.FragmentHomeBinding
-import com.jetchan.dev.src.MyAdapter
+import com.jetchan.dev.databinding.FragmentOrganizationBinding
+import com.jetchan.dev.src.OrganizationAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeFragment : Fragment() {
+class OrganizationFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentOrganizationBinding? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: MyAdapter
+    private lateinit var adapter: OrganizationAdapter
     private var dataLoaded = false
 
     // This property is only valid between onCreateView and
@@ -33,15 +32,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val organizationViewModel =
+            ViewModelProvider(this).get(OrganizationViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentOrganizationBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        recyclerView = root.findViewById(R.id.rv_users)
+        recyclerView = root.findViewById(R.id.rv_organization)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = MyAdapter(emptyArray())
+        adapter = OrganizationAdapter(emptyArray())
         recyclerView.adapter = adapter
 
         return root
@@ -66,7 +64,9 @@ class HomeFragment : Fragment() {
             val data = withContext(Dispatchers.IO) {
                 // 模拟耗时的数据加载操作
                 Thread.sleep(200)
-                arrayOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
+                Array<String>(100) { index ->
+                    "Organization${index + 1}"
+                }
             }
             adapter.updateData(data)
             dataLoaded = true

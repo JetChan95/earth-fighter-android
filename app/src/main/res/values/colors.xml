@@ -7,4 +7,50 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--    莫兰迪粉绿
+    主色调 - 温柔粉：#F6C9E5
+    莫兰迪粉色柔和温暖，能营造出温馨、舒适的氛围，常用于欢迎界面、活动推广区域等，增强用户的情感共鸣。
+    辅助色 - 清新绿：#A2D39C
+    清新的绿色带来生机与活力，与粉色搭配相得益彰。可用于图标、小标签等，增添视觉亮点。
+    背景色 - 米白色：#F5F0E1
+    米白色是一种柔和的中性色，作为背景色可以让整个界面更加和谐，给人一种自然、质朴的感觉。
+    文字色 - 浅咖色：#8B786D
+    浅咖色文字与米白色背景搭配协调，具有一定的质感，适用于各种文本信息展示。
+    -->
+    <color name="morandi_gentle_powder">#F6C9E5</color>
+    <color name="morandi_fresh_green">#A2D39C</color>
+    <color name="morandi_off_white">#F5F0E1</color>
+    <color name="morandi_light_brown">#8B786D</color>
+
+    <!--    蓝白搭配
+    主色调 - 科技蓝：#2F80ED
+    这种蓝色清新且具有科技感，能够传达出专业、可靠的形象，适合用于头部导航栏、重要按钮、关键信息提示等，吸引用户注意力并突出主要操作。
+    辅助色 - 天空蓝：#73A6FF
+    比主色调稍浅，可用于页面的次要元素，如卡片背景、进度条等，起到过渡和丰富页面层次的作用。
+    背景色 - 纯净白：#FFFFFF
+    白色给人简洁、干净的感觉，作为背景色可以让整个 APP 界面显得开阔明亮，突出内容主体，减少视觉干扰。
+    文字色 - 深灰：#333333
+    深灰色文字在白色背景上具有良好的可读性，不会过于刺眼，适用于正文内容、标题等
+    -->
+    <color name="BW_technology_blue">#2F80ED</color>
+    <color name="BW_sky_blue">#73A6FF</color>
+    <color name="BW_white">#FFFFFF</color>
+    <color name="BW_dark_gray">#333333</color>
+
+<!--    黑白灰经典
+主色调 - 黑色：#000000
+黑色代表着神秘、高端和稳重，可用于标题、重要图标等，突出关键元素。
+辅助色 - 银灰色：#C0C0C0
+银灰色具有现代感和科技感，常用于分割线、次要按钮等，增加界面的层次感。
+背景色 - 浅灰色：#F5F5F5
+浅灰色背景简洁大方，不会过于单调，同时能与黑色和银灰色形成对比，使界面更加清晰易读。
+文字色 - 白色：#FFFFFF
+在黑色元素上使用白色文字，形成强烈的对比，提高可读性；在浅灰色背景上也能清晰显示，适用于各种文本内容。
+-->
+    <color name="classic_black">#000000</color>
+    <color name="classic_silver_gray">#C0C0C0</color>
+    <color name="classic_light_gray">#F5F5F5</color>
+    <color name="classic_white">#FFFFFF</color>
+
 </resources>
