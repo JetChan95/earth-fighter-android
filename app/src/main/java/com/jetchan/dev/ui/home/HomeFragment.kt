@@ -1,10 +1,10 @@
 package com.jetchan.dev.ui.home
 
 import android.os.Bundle
+import android.os.Debug
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +16,10 @@ import com.jetchan.dev.src.MyAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.navigation.fragment.findNavController
+import com.jetchan.dev.utils.NavStackTracker
+import com.jetchan.dev.utils.getCurrentFunctionName
+import timber.log.Timber
 
 class HomeFragment : Fragment() {
 
@@ -23,6 +27,12 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MyAdapter
     private var dataLoaded = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val navController = findNavController()
+        NavStackTracker(navController, "home")
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -33,6 +43,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -56,12 +67,14 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         if (adapter.itemCount == 0) {
             loadData()
         }
     }
 
     private fun loadData() {
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         lifecycleScope.launch {
             val data = withContext(Dispatchers.IO) {
                 // 模拟耗时的数据加载操作

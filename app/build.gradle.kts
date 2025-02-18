@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.jetchan.dev"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.jetchan.dev"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -62,7 +62,8 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.timber)
     implementation (libs.gson)
-    implementation ("androidx.recyclerview:recyclerview:1.3.0")
+    implementation (libs.androidx.recyclerview)
+    implementation (libs.androidx.gridlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

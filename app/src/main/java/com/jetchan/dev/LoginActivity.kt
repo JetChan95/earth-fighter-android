@@ -7,7 +7,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.jetchan.dev.src.AuthBody
 import com.jetchan.dev.src.AuthResponse
@@ -21,7 +20,6 @@ import retrofit2.Callback
 import com.jetchan.dev.utils.TimeUtils
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicInteger
-import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
 

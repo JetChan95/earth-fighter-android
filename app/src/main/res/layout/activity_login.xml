@@ -55,7 +55,6 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/pixel_button_background"
         android:text="@string/login"
         android:textColor="#FFFFFF" />
 
@@ -64,7 +63,6 @@
         android:id="@+id/btn_registry"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/pixel_button_background"
         android:text="@string/register"
         android:textColor="#FFFFFF" />
 

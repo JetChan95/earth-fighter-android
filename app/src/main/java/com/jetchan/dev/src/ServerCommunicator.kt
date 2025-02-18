@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import java.lang.reflect.Method
 
@@ -29,6 +30,18 @@ interface ApiService {
     @GET("/users/{u_id}/info")
     @NeedToken
     fun getUserInfoById(@Path("u_id")path: Int): retrofit2.Call<User>
+
+    @POST("/organizations/create")
+    @NeedToken
+    fun createOrganization(@Body body: OrganizationBaseInfo): retrofit2.Call<OrganizationBaseInfo>
+
+    @GET("/users/organizations")
+    @NeedToken
+    fun getOrganizationList(): retrofit2.Call<GetOrgListResponse>
+
+    @PUT("/organizations/{c_id}/join")
+    @NeedToken
+    fun joinOrganization(@Path("c_id")path: Int, @Body body: OrganizationBaseInfo): retrofit2.Call<JoinOrgResponse>
 }
 
 class TokenInterceptor(private val context: Context) : Interceptor {
@@ -57,7 +70,7 @@ class TokenInterceptor(private val context: Context) : Interceptor {
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.1.15:5000/" // 替换为实际的服务器 API 基础 URL
+    private const val BASE_URL = "http://192.168.1.130:5000/" // 替换为实际的服务器 API 基础 URL
 
     fun getInstance(context: Context): ApiService {
         val okHttpClient = OkHttpClient.Builder()
@@ -101,6 +114,21 @@ class ServerCommunicator private constructor(context: Context) {
 
     fun getUserInfoById(path: Int, callback: Callback<User>) {
         val call = apiService.getUserInfoById(path)
+        call.enqueue(callback)
+    }
+
+    fun createOrganization(body: OrganizationBaseInfo, callback: Callback<OrganizationBaseInfo>) {
+        val call = apiService.createOrganization(body)
+        call.enqueue(callback)
+    }
+
+    fun getOrganizationList(callback: Callback<GetOrgListResponse>) {
+        val call = apiService.getOrganizationList()
+        call.enqueue(callback)
+    }
+
+    fun joinOrganization(path: Int, body: OrganizationBaseInfo, callback: Callback<JoinOrgResponse>) {
+        val call = apiService.joinOrganization(path, body)
         call.enqueue(callback)
     }
 }

@@ -10,11 +10,32 @@
     <string name="action_logout">注销</string>
 
     <string name="menu_home">Home</string>
-    <string name="menu_task">任务</string>
-    <string name="menu_organization">组织</string>
+    <string name="menu_task">Task</string>
+    <string name="menu_organization">Org</string>
+
     <string name="register">注册</string>
     <string name="login">登录</string>
     <string name="password">密码</string>
     <string name="username">用户名</string>
-    <string name="join_organization">加入新组织</string>
+    <string name="join_organization">加入组织</string>
+    <string name="create_organization">创建组织</string>
+    <string name="invite_code">请输入邀请码</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="title">标题</string>
+    <string name="hint">输入提示</string>
+    <string name="description">说明</string>
+
+    <string-array name="organization_types_zh">
+        <item>家庭</item>
+        <item>国家</item>
+        <item>学校</item>
+    </string-array>
+
+    <string-array name="organization_types_row">
+        <item>family</item>
+        <item>country</item>
+        <item>school</item>
+    </string-array>
+
 </resources>

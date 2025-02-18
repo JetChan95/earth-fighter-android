@@ -4,19 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jetchan.dev.R
 import com.jetchan.dev.databinding.FragmentTaskBinding
-import com.jetchan.dev.src.OrganizationAdapter
 import com.jetchan.dev.src.TaskAdapter
+import com.jetchan.dev.utils.NavStackTracker
+import com.jetchan.dev.utils.getCurrentFunctionName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class TaskFragment : Fragment() {
 
@@ -33,6 +35,7 @@ class TaskFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         val taskViewModel =
             ViewModelProvider(this).get(TaskViewModel::class.java)
 
@@ -48,6 +51,7 @@ class TaskFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         super.onViewCreated(view, savedInstanceState)
         if (!dataLoaded) {
             loadData()
@@ -55,6 +59,7 @@ class TaskFragment : Fragment() {
     }
 
     override fun onResume() {
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         super.onResume()
         if (adapter.itemCount == 0) {
             loadData()
@@ -62,6 +67,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun loadData() {
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         lifecycleScope.launch {
             val data = withContext(Dispatchers.IO) {
                 // 加载数据
@@ -76,7 +82,14 @@ class TaskFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onDestroy() {
+        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
+        super.onDestroy()
         _binding = null
     }
 }

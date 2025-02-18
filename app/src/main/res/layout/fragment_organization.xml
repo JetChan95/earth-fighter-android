@@ -21,9 +21,16 @@
         android:id="@+id/btn_joinOrg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/pixel_button_background"
         android:text="@string/join_organization"
-        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@id/btn_createOrg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_createOrg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/create_organization"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
