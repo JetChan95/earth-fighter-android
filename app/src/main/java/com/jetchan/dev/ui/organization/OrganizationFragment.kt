@@ -16,23 +16,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
 import com.jetchan.dev.R
 import com.jetchan.dev.databinding.FragmentOrganizationBinding
-import com.jetchan.dev.src.GetOrgListResponse
-import com.jetchan.dev.src.JoinOrgResponse
 import com.jetchan.dev.src.OrganizationBaseInfo
-import com.jetchan.dev.src.ServerCommunicator
 import com.jetchan.dev.src.organization.OrganizationAdapter
 import com.jetchan.dev.utils.InputFilterUtils
 import com.jetchan.dev.utils.SharedPreferencesUtil
 import com.jetchan.dev.utils.getCurrentFunctionName
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 
 class OrganizationFragment : Fragment() {
@@ -40,12 +31,14 @@ class OrganizationFragment : Fragment() {
     private var _binding: FragmentOrganizationBinding? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: OrganizationAdapter
-    private var dataLoaded = false
-    private var orgList: ArrayList<OrganizationBaseInfo> = arrayListOf()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private val viewModel: OrganizationViewModel by lazy {
+        ViewModelProvider(this).get(OrganizationViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,8 +46,6 @@ class OrganizationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
-        val organizationViewModel =
-            ViewModelProvider(this).get(OrganizationViewModel::class.java)
 
         _binding = FragmentOrganizationBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -79,45 +70,10 @@ class OrganizationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         super.onViewCreated(view, savedInstanceState)
-        if (!dataLoaded) {
-            loadData()
+        viewModel.orgList.observe(viewLifecycleOwner) {
+            adapter.updateData(it)
         }
-    }
-
-    override fun onResume() {
-        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
-        super.onResume()
-        if (adapter.itemCount == 0) {
-            loadData()
-        }
-    }
-
-    private fun loadData() {
-        lifecycleScope.launch {
-            ServerCommunicator.getInstance(requireContext()).getOrganizationList(object : Callback<GetOrgListResponse> {
-                override fun onResponse(call: Call<GetOrgListResponse>, response: Response<GetOrgListResponse>) {
-                    val orgListResponse: GetOrgListResponse? = response.body()
-                    if (orgListResponse != null) {
-                        Timber.d(Gson().toJson(orgListResponse))
-                        orgList = orgListResponse.data
-                        updateData()
-                    }
-                    return
-                }
-
-                override fun onFailure(call: Call<GetOrgListResponse>, t: Throwable) {
-                    Timber.d("error", t)
-                    return
-                }
-            })
-        }
-    }
-
-    private fun updateData() {
-        lifecycleScope.launch {
-            adapter.updateData(orgList)
-            dataLoaded = true
-        }
+        viewModel.loadData(requireContext())
     }
 
     override fun onDestroyView() {
@@ -173,20 +129,7 @@ class OrganizationFragment : Fragment() {
                 return@setOnClickListener
             }
             val orgInfo: OrganizationBaseInfo = OrganizationBaseInfo(id = orgId.toInt(), inviteCode = inviteCode)
-            ServerCommunicator.getInstance(requireContext()).joinOrganization(orgId.toInt(), orgInfo, object: Callback<JoinOrgResponse> {
-                override fun onResponse(call: Call<JoinOrgResponse>, response: Response<JoinOrgResponse>) {
-                    val joinResponse: JoinOrgResponse? = response.body()
-                    if (joinResponse != null) {
-                        Timber.d(Gson().toJson(joinResponse))
-                        orgList.add(joinResponse.data)
-                        updateData()
-                    }
-                }
-
-                override fun onFailure(call: Call<JoinOrgResponse>, t: Throwable) {
-                    Timber.d("error", t)
-                }
-            })
+            viewModel.joinOrganization(requireContext(), orgId.toInt(), orgInfo)
             Toast.makeText(requireContext(), "组织ID：${orgId}，邀请码：${inviteCode}", Toast.LENGTH_SHORT).show()
             customDialog.dismiss()
         }
@@ -248,26 +191,8 @@ class OrganizationFragment : Fragment() {
 
             // 创建组织
             val orgInfo = OrganizationBaseInfo(0, name, type, "")
-            ServerCommunicator.getInstance(requireContext()).createOrganization(orgInfo, object:
-                Callback<OrganizationBaseInfo> {
-                override fun onResponse(call: Call<OrganizationBaseInfo>, response: Response<OrganizationBaseInfo>) {
-                    val org: OrganizationBaseInfo? = response.body()
-                    if (org != null) {
-                        Timber.d(Gson().toJson(org))
-                        orgList.add(org)
-                        updateData()
-                    }
-                    Timber.d("msg: ${response.message()}, code: ${response.code()}, body: ${response.body()}," +
-                            "raw: ${response.raw()}, errorBody: ${response.errorBody()}")
-
-                    customDialog.dismiss()
-                }
-
-                override fun onFailure(call: Call<OrganizationBaseInfo>, t: Throwable) {
-                    Timber.d("error", t)
-                    customDialog.dismiss()
-                }
-            })
+            viewModel.createOrganization(requireContext(), orgInfo)
+            customDialog.dismiss()
         }
 
         customDialog.show()
@@ -276,6 +201,5 @@ class OrganizationFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
-
     }
 }
