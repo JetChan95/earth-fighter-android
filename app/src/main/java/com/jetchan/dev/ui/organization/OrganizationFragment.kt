@@ -218,7 +218,7 @@ class OrganizationFragment : Fragment(), OrganizationAdapter.OnItemClickListener
     override fun onItemClick(orgInfo: OrganizationBaseInfo) {
         // 创建 Bundle 用于传递数据
         val bundle = Bundle()
-        bundle.putString("id", orgInfo.id.toString())
+        bundle.putInt("id", orgInfo.id)
         bundle.putString("name", orgInfo.name)
         bundle.putString("type", orgInfo.type)
         bundle.putString("inviteCode", orgInfo.inviteCode)

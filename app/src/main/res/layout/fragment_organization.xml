@@ -26,7 +26,6 @@
         android:padding="16dp"
         android:text="@string/no_org"
         android:textSize="18sp"
-
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_joinOrg"/>
 

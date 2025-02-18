@@ -27,6 +27,8 @@
     <string name="description">说明</string>
     <string name="no_tasks">您还未接取任务</string>
     <string name="no_org">您还未加入组织</string>
+    <string name="no_org_task">该组织暂无任务</string>
+    <string name="publish_task">发布任务</string>
 
     <string-array name="organization_types_zh">
         <item>家庭</item>

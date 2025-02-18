@@ -46,6 +46,10 @@ interface ApiService {
     @GET("/users/tasks")
     @NeedToken
     fun getUserTaskList(): retrofit2.Call<GetUserTaskListResponse>
+
+    @GET("/organizations/{c_id}/tasks")
+    @NeedToken
+    fun getOrgTaskList(@Path("c_id")path: Int): retrofit2.Call<GetOrgTaskListResponse>
 }
 
 class TokenInterceptor(private val context: Context) : Interceptor {
@@ -138,6 +142,11 @@ class ServerCommunicator private constructor(context: Context) {
 
     fun getUserTaskList(callback: Callback<GetUserTaskListResponse>) {
         val call = apiService.getUserTaskList()
+        call.enqueue(callback)
+    }
+
+    fun getOrgTaskList(path: Int, callback: Callback<GetOrgTaskListResponse>) {
+        val call = apiService.getOrgTaskList(path)
         call.enqueue(callback)
     }
 }

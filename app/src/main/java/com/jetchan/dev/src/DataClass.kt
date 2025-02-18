@@ -69,3 +69,8 @@ data class GetUserTaskListResponse(
     @SerializedName("message") val message: String,
     @SerializedName("data") val data: ArrayList<Task>
 )
+
+data class GetOrgTaskListResponse(
+    @SerializedName("message") val message: String,
+    @SerializedName("data") val data: ArrayList<Task>
+)
