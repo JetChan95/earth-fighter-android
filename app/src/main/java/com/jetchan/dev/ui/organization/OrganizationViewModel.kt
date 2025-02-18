@@ -21,11 +21,6 @@ class OrganizationViewModel : ViewModel() {
     private val _orgList = MutableLiveData<ArrayList<OrganizationBaseInfo>>()
     val orgList: LiveData<ArrayList<OrganizationBaseInfo>> = _orgList
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "组织界面"
-    }
-    val text: LiveData<String> = _text
-
     fun loadData(context: android.content.Context) {
         viewModelScope.launch(Dispatchers.IO) {
             ServerCommunicator.getInstance(context).getOrganizationList(object : Callback<GetOrgListResponse> {

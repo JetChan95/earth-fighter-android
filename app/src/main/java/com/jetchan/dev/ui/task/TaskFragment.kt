@@ -7,13 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jetchan.dev.R
 import com.jetchan.dev.databinding.FragmentTaskBinding
-import com.jetchan.dev.src.TaskAdapter
-import com.jetchan.dev.utils.NavStackTracker
+import com.jetchan.dev.src.task.TaskAdapter
 import com.jetchan.dev.utils.getCurrentFunctionName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

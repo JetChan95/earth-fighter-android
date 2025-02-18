@@ -9,8 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jetchan.dev.R
 import com.jetchan.dev.src.OrganizationBaseInfo
 
-class OrganizationAdapter(private val context: Context, private var dataList: ArrayList<OrganizationBaseInfo>) :
+class OrganizationAdapter(private val context: Context,
+                          private var dataList: ArrayList<OrganizationBaseInfo>,
+                          private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<OrganizationAdapter.ViewHolder>() {
+
+
+    interface OnItemClickListener {
+        fun onItemClick(orgInfo: OrganizationBaseInfo)
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val orgName: android.widget.TextView = itemView.findViewById(R.id.tv_org_name)
@@ -33,6 +40,10 @@ class OrganizationAdapter(private val context: Context, private var dataList: Ar
                 }
             }
         }
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener.onItemClick(dataList[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +51,10 @@ class OrganizationAdapter(private val context: Context, private var dataList: Ar
     }
 
     fun updateData(newData: ArrayList<OrganizationBaseInfo>) {
-        dataList = newData
+        dataList.clear()
+        dataList.addAll(newData)
         notifyDataSetChanged()
     }
+
+
 }

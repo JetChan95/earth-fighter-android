@@ -26,6 +26,17 @@
         android:name="com.jetchan.dev.ui.organization.OrganizationFragment"
         android:label="@string/menu_organization"
         tools:layout="@layout/fragment_organization" >
+        <action
+            android:id="@+id/action_nav_organization_to_nav_org_detail"
+            app:destination="@id/nav_org_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_org_detail"
+        android:name="com.jetchan.dev.ui.organization.OrganizationDetailFragment"
+        android:label="@string/menu_organization"
+        tools:layout="@layout/fragment_org_detail" >
+
     </fragment>
 
 </navigation>

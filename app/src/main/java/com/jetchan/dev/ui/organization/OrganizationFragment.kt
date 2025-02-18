@@ -12,6 +12,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,8 +26,10 @@ import com.jetchan.dev.utils.SharedPreferencesUtil
 import com.jetchan.dev.utils.getCurrentFunctionName
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 
-class OrganizationFragment : Fragment() {
+class OrganizationFragment : Fragment(), OrganizationAdapter.OnItemClickListener {
 
     private var _binding: FragmentOrganizationBinding? = null
     private lateinit var recyclerView: RecyclerView
@@ -51,7 +54,7 @@ class OrganizationFragment : Fragment() {
         val root: View = binding.root
         recyclerView = root.findViewById(R.id.rv_organization)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = OrganizationAdapter(requireContext(), arrayListOf())
+        adapter = OrganizationAdapter(requireContext(), arrayListOf(), this)
         recyclerView.adapter = adapter
 
         val btnJoinOrg = root.findViewById<Button>(R.id.btn_joinOrg)
@@ -201,5 +204,16 @@ class OrganizationFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
+    }
+
+    override fun onItemClick(orgInfo: OrganizationBaseInfo) {
+        // 创建 Bundle 用于传递数据
+        val bundle = Bundle()
+        bundle.putString("id", orgInfo.id.toString())
+        bundle.putString("name", orgInfo.name)
+        bundle.putString("type", orgInfo.type)
+        bundle.putString("inviteCode", orgInfo.inviteCode)
+
+        findNavController().navigate(R.id.action_nav_organization_to_nav_org_detail, bundle)
     }
 }

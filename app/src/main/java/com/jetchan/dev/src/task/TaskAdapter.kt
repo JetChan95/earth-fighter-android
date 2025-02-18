@@ -1,4 +1,4 @@
-package com.jetchan.dev.src
+package com.jetchan.dev.src.task
 
 import android.view.LayoutInflater
 import android.view.View
