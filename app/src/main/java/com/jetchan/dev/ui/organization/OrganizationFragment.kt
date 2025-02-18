@@ -34,6 +34,7 @@ class OrganizationFragment : Fragment(), OrganizationAdapter.OnItemClickListener
     private var _binding: FragmentOrganizationBinding? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: OrganizationAdapter
+    private lateinit var noOrgTextView: TextView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -67,6 +68,7 @@ class OrganizationFragment : Fragment(), OrganizationAdapter.OnItemClickListener
             showCreateOrgDialog()
         }
 
+        noOrgTextView = root.findViewById(R.id.no_org_text_view)
         return root
     }
 
@@ -75,6 +77,13 @@ class OrganizationFragment : Fragment(), OrganizationAdapter.OnItemClickListener
         super.onViewCreated(view, savedInstanceState)
         viewModel.orgList.observe(viewLifecycleOwner) {
             adapter.updateData(it)
+            if (it.isEmpty()) {
+                binding.noOrgTextView.visibility = View.VISIBLE
+                binding.rvOrganization.visibility = View.GONE
+            } else {
+                binding.noOrgTextView.visibility = View.GONE
+                binding.rvOrganization.visibility = View.VISIBLE
+            }
         }
         viewModel.loadData(requireContext())
     }

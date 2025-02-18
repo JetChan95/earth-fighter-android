@@ -42,6 +42,10 @@ interface ApiService {
     @PUT("/organizations/{c_id}/join")
     @NeedToken
     fun joinOrganization(@Path("c_id")path: Int, @Body body: OrganizationBaseInfo): retrofit2.Call<JoinOrgResponse>
+
+    @GET("/users/tasks")
+    @NeedToken
+    fun getUserTaskList(): retrofit2.Call<GetUserTaskListResponse>
 }
 
 class TokenInterceptor(private val context: Context) : Interceptor {
@@ -129,6 +133,11 @@ class ServerCommunicator private constructor(context: Context) {
 
     fun joinOrganization(path: Int, body: OrganizationBaseInfo, callback: Callback<JoinOrgResponse>) {
         val call = apiService.joinOrganization(path, body)
+        call.enqueue(callback)
+    }
+
+    fun getUserTaskList(callback: Callback<GetUserTaskListResponse>) {
+        val call = apiService.getUserTaskList()
         call.enqueue(callback)
     }
 }
