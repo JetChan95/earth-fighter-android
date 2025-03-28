@@ -74,3 +74,10 @@ data class GetOrgTaskListResponse(
     @SerializedName("message") val message: String,
     @SerializedName("data") val data: ArrayList<Task>
 )
+
+data class TaskDescription(val description: String, val todoList: MutableList<Pair<String, Boolean>> = arrayListOf())
+
+data class TaskResponse(
+    @SerializedName("message") val message: String,
+    @SerializedName("data") val data: Task
+)

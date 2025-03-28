@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/morandi_off_white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/morandi_fresh_green</item>
-        <item name="colorSecondaryVariant">@color/morandi_fresh_green</item>
+        <item name="colorSecondaryVariant">@color/morandi_fresh_green_half</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>

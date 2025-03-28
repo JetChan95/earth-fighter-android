@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/content_task_handler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- 任务 ID 标签 -->
+            <TextView
+                android:id="@+id/tv_task_id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_task_id"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 任务 ID 数据 -->
+            <TextView
+                android:id="@+id/tv_task_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_task_id_label"
+                app:layout_constraintTop_toTopOf="@id/tv_task_id_label"
+                android:layout_marginStart="8dp" />
+
+            <!-- 任务名称标签 -->
+            <TextView
+                android:id="@+id/tv_task_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_task_name"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_id_label"
+                android:layout_marginTop="16dp" />
+
+            <!-- 任务名称数据 -->
+            <TextView
+                android:id="@+id/tv_task_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_task_name_label"
+                app:layout_constraintTop_toTopOf="@id/tv_task_name_label"
+                android:layout_marginStart="8dp" />
+
+            <!-- 发布者 ID 标签 -->
+            <TextView
+                android:id="@+id/tv_publisher_id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_publisher_id"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_name_label"
+                android:layout_marginTop="16dp" />
+
+            <!-- 发布者 ID 数据 -->
+            <TextView
+                android:id="@+id/tv_publisher_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_publisher_id_label"
+                app:layout_constraintTop_toTopOf="@id/tv_publisher_id_label"
+                android:layout_marginStart="8dp" />
+
+            <!-- 接收者 ID 标签 -->
+            <TextView
+                android:id="@+id/tv_receiver_id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_receiver_id"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_publisher_id_label"
+                android:layout_marginTop="16dp" />
+
+            <!-- 接收者 ID 数据 -->
+            <TextView
+                android:id="@+id/tv_receiver_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_receiver_id_label"
+                app:layout_constraintTop_toTopOf="@id/tv_receiver_id_label"
+                android:layout_marginStart="8dp" />
+
+            <!-- 任务状态标签 -->
+            <TextView
+                android:id="@+id/tv_task_state_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_task_status"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_receiver_id_label"
+                android:layout_marginTop="16dp" />
+
+            <!-- 任务状态数据 -->
+            <TextView
+                android:id="@+id/tv_task_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_task_state_label"
+                app:layout_constraintTop_toTopOf="@id/tv_task_state_label"
+                android:layout_marginStart="8dp" />
+
+            <!-- 完成时间标签 -->
+            <TextView
+                android:id="@+id/tv_completion_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_complete_time"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_state_label"
+                android:layout_marginTop="16dp" />
+
+            <!-- 完成时间数据 -->
+            <TextView
+                android:id="@+id/tv_completion_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_completion_time_label"
+                app:layout_constraintTop_toTopOf="@id/tv_completion_time_label"
+                android:layout_marginStart="8dp" />
+
+            <!-- 组织 ID 标签 -->
+            <TextView
+                android:id="@+id/tv_org_id_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_org_id"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_completion_time_label"
+                android:layout_marginTop="16dp" />
+
+            <!-- 组织 ID 数据 -->
+            <TextView
+                android:id="@+id/tv_org_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_org_id_label"
+                app:layout_constraintTop_toTopOf="@id/tv_org_id_label"
+                android:layout_marginStart="8dp" />
+
+            <!-- 任务描述标签 -->
+            <TextView
+                android:id="@+id/tv_task_desc_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_task_desc"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_org_id_label"
+                android:layout_marginTop="16dp" />
+
+            <!-- 任务描述数据 -->
+            <TextView
+                android:id="@+id/tv_task_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_desc_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
+
+            <!-- 待办项目列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_todo_items"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/tv_publish_time_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_task_desc" />
+
+            <!-- 发布时间标签 -->
+            <TextView
+                android:id="@+id/tv_publish_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_publish_time"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_todo_items"
+                android:layout_marginTop="16dp" />
+
+            <!-- 发布时间数据 -->
+            <TextView
+                android:id="@+id/tv_publish_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_publish_time_label"
+                app:layout_constraintTop_toTopOf="@id/tv_publish_time_label"
+                android:layout_marginStart="8dp" />
+
+            <!-- 时间限制标签 -->
+            <TextView
+                android:id="@+id/tv_time_limit_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_time_limit"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_publish_time_label"
+                android:layout_marginTop="16dp" />
+
+            <!-- 时间限制数据 -->
+            <TextView
+                android:id="@+id/tv_time_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/tv_time_limit_label"
+                app:layout_constraintTop_toTopOf="@id/tv_time_limit_label"
+                android:layout_marginStart="8dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/content_task_handler"
+        layout="@layout/content_task_handler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

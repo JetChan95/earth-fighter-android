@@ -19,6 +19,9 @@
         android:label="@string/menu_task"
         tools:layout="@layout/fragment_task" >
 
+        <action
+            android:id="@+id/action_nav_task_to_nav_org_task_detail"
+            app:destination="@id/nav_org_task_detail" />
     </fragment>
 
     <fragment
@@ -34,9 +37,29 @@
     <fragment
         android:id="@+id/nav_org_detail"
         android:name="com.jetchan.dev.ui.organization.OrganizationDetailFragment"
-        android:label="@string/menu_organization"
+        android:label="@string/title_organization_details"
         tools:layout="@layout/fragment_org_detail" >
 
+        <action
+            android:id="@+id/action_nav_org_detail_to_nav_org_publish_task"
+            app:destination="@id/nav_org_publish_task" />
+        <action
+            android:id="@+id/action_nav_org_detail_to_nav_org_task_detail"
+            app:destination="@id/nav_org_task_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_org_publish_task"
+        android:name="com.jetchan.dev.ui.organization.PublishTaskFragment"
+        android:label="@string/title_publish_task"
+        tools:layout="@layout/fragment_publish_task" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_org_task_detail"
+        android:name="com.jetchan.dev.ui.organization.OrgTaskDetailFragment"
+        android:label="@string/title_org_task_detail"
+        tools:layout="@layout/fragment_org_task" >
     </fragment>
 
 </navigation>

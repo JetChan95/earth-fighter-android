@@ -9,9 +9,9 @@
     <string name="action_settings">设置</string>
     <string name="action_logout">注销</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_task">Task</string>
-    <string name="menu_organization">Org</string>
+    <string name="menu_home">主页</string>
+    <string name="menu_task">我的任务</string>
+    <string name="menu_organization">我的组织</string>
 
     <string name="register">注册</string>
     <string name="login">登录</string>
@@ -28,7 +28,32 @@
     <string name="no_tasks">您还未接取任务</string>
     <string name="no_org">您还未加入组织</string>
     <string name="no_org_task">该组织暂无任务</string>
-    <string name="publish_task">发布任务</string>
+    <string name="title_organization_details">组织管理</string>
+    <string name="title_publish_task">发布任务</string>
+    <string name="title_org_task_detail">任务详情"</string>
+
+<!--    提示文本    -->
+    <string name="hint_creator">发布者：</string>"
+    <string name="hint_id">ID:</string>
+    <string name="hint_time_limit">时间限制:</string>
+    <string name="hint_publish_time">发布时间:</string>
+    <string name="hint_task_desc">任务描述:</string>
+    <string name="hint_org_id">组织 ID:</string>
+    <string name="hint_complete_time">完成时间:</string>
+    <string name="hint_task_status">任务状态:</string>
+    <string name="hint_receiver_id">接收者 ID:</string>
+    <string name="hint_publisher_id">发布者 ID:</string>
+    <string name="hint_task_name">任务名称:</string>
+    <string name="hint_task_id">任务 ID:</string>
+
+<!--  任务管理按钮名称  -->
+    <string name="btn_publish_task">发布任务</string>
+    <string name="btn_accept_task">接受任务</string>
+    <string name="btn_give_up_task">放弃任务</string>
+    <string name="btn_submit_task">提交任务</string>
+    <string name="btn_confirm_task">确认任务</string>
+    <string name="btn_delete_task">删除任务</string>
+
 
     <string-array name="organization_types_zh">
         <item>家庭</item>
@@ -40,6 +65,11 @@
         <item>family</item>
         <item>country</item>
         <item>school</item>
+    </string-array>
+
+    <string-array name="task_types">
+        <item>普通</item>
+        <item>限时</item>
     </string-array>
 
 </resources>

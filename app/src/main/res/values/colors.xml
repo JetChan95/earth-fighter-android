@@ -20,6 +20,7 @@
     -->
     <color name="morandi_gentle_powder">#F6C9E5</color>
     <color name="morandi_fresh_green">#A2D39C</color>
+    <color name="morandi_fresh_green_half">#80A2D39C</color>
     <color name="morandi_off_white">#F5F0E1</color>
     <color name="morandi_light_brown">#8B786D</color>
 
@@ -50,6 +51,7 @@
 -->
     <color name="classic_black">#000000</color>
     <color name="classic_silver_gray">#C0C0C0</color>
+    <color name="classic_silver_gray_half">#80C0C0C0</color>
     <color name="classic_light_gray">#F5F5F5</color>
     <color name="classic_white">#FFFFFF</color>
 

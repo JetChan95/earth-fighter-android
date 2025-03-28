@@ -4,10 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.jetchan.dev.src.OrganizationBaseInfo
 import com.jetchan.dev.src.Task
 
 class TaskAdapter(private var dataList: ArrayList<Task>) :
     RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(taskInfo: Task)
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: android.widget.TextView = itemView.findViewById(android.R.id.text1)

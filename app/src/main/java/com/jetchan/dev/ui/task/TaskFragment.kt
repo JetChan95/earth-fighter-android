@@ -9,20 +9,24 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
 import com.jetchan.dev.R
 import com.jetchan.dev.databinding.FragmentTaskBinding
+import com.jetchan.dev.src.Task
 import com.jetchan.dev.src.task.TaskAdapter
+import com.jetchan.dev.src.task.UserTaskAdapter
 import com.jetchan.dev.utils.getCurrentFunctionName
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class TaskFragment : Fragment() {
+class TaskFragment : Fragment(), UserTaskAdapter.OnItemClickListener {
 
     private var _binding: FragmentTaskBinding? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: TaskAdapter
+    private lateinit var adapter: UserTaskAdapter
     private lateinit var noTasksTextView: TextView
 
     // This property is only valid between onCreateView and
@@ -45,7 +49,7 @@ class TaskFragment : Fragment() {
 
         recyclerView = root.findViewById(R.id.rv_task)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = TaskAdapter(arrayListOf())
+        adapter = UserTaskAdapter(arrayListOf(), this)
         recyclerView.adapter = adapter
 
         noTasksTextView = root.findViewById(R.id.no_tasks_text_view)
@@ -88,5 +92,13 @@ class TaskFragment : Fragment() {
         Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onItemClick(taskInfo: Task) {
+        // 创建 Bundle 用于传递数据
+        val bundle = Bundle()
+        bundle.putString("task", Gson().toJson(taskInfo))
+
+        findNavController().navigate(R.id.action_nav_task_to_nav_org_task_detail, bundle)
     }
 }

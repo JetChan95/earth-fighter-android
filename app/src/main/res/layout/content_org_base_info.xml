@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/fragment_org_detail">
+    android:background="@drawable/border_shape"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tv_org_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <!-- 组织名称，作为显示主题 -->
+        <TextView
+            android:id="@+id/tv_org_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_org_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_org_id"
-        />
+        <!-- 组织 ID 说明 -->
+        <TextView
+            android:id="@+id/tv_org_id_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_id"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_org_name"
+            android:layout_marginTop="8dp" />
 
-    <TextView
-        android:id="@+id/tv_org_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_org_name"
-        />
+        <!-- 组织 ID 数据 -->
+        <TextView
+            android:id="@+id/tv_org_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_org_id_label"
+            app:layout_constraintTop_toTopOf="@id/tv_org_id_label"
+            android:layout_marginStart="4dp" />
 
-    <TextView
-        android:id="@+id/tv_org_invite_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@id/tv_org_type"
-        />
+        <!-- 组织类型 -->
+        <TextView
+            android:id="@+id/tv_org_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_org_name"
+            app:layout_constraintHorizontal_bias="0.7" />
+
+        <!-- 组织邀请码 -->
+        <TextView
+            android:id="@+id/tv_org_invite_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_org_type"
+            android:layout_marginTop="8dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

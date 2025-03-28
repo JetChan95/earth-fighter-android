@@ -22,11 +22,15 @@ import com.jetchan.dev.utils.getCurrentFunctionName
 import timber.log.Timber
 
 class HomeFragment : Fragment() {
+    private lateinit var _binding: FragmentHomeBinding
 
-    private var _binding: FragmentHomeBinding? = null
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: MyAdapter
-    private var dataLoaded = false
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding
+
+    private val homeViewModel: HomeViewModel by lazy {
+        ViewModelProvider(this)[HomeViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,60 +38,20 @@ class HomeFragment : Fragment() {
         NavStackTracker(navController, "home")
     }
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        recyclerView = root.findViewById(R.id.rv_users)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = MyAdapter(emptyArray())
-        recyclerView.adapter = adapter
 
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!dataLoaded) {
-            loadData()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
-        if (adapter.itemCount == 0) {
-            loadData()
-        }
-    }
-
-    private fun loadData() {
-        Timber.d("Trace life time ${this::class.simpleName}.${getCurrentFunctionName()}")
-        lifecycleScope.launch {
-            val data = withContext(Dispatchers.IO) {
-                // 模拟耗时的数据加载操作
-                Thread.sleep(200)
-                arrayOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5")
-            }
-            adapter.updateData(data)
-            dataLoaded = true
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

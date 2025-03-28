@@ -25,7 +25,7 @@ class OrganizationAdapter(private val context: Context,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.organization_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_organization, parent, false)
         return ViewHolder(view)
     }
 

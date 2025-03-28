@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 接受任务按钮 -->
+    <Button
+        android:id="@+id/btn_accept_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_accept_task"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 放弃任务按钮 -->
+    <Button
+        android:id="@+id/btn_give_up_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_give_up_task"
+        app:layout_constraintTop_toBottomOf="@id/btn_accept_task"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 提交任务按钮 -->
+    <Button
+        android:id="@+id/btn_submit_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_submit_task"
+        app:layout_constraintTop_toBottomOf="@id/btn_give_up_task"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 确认任务按钮 -->
+    <Button
+        android:id="@+id/btn_confirm_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_confirm_task"
+        app:layout_constraintTop_toBottomOf="@id/btn_submit_task"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 删除任务按钮 -->
+    <Button
+        android:id="@+id/btn_delete_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_delete_task"
+        app:layout_constraintTop_toBottomOf="@id/btn_confirm_task"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

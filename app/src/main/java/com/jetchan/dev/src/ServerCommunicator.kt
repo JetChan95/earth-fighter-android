@@ -11,6 +11,7 @@ import retrofit2.Invocation
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -50,6 +51,30 @@ interface ApiService {
     @GET("/organizations/{c_id}/tasks")
     @NeedToken
     fun getOrgTaskList(@Path("c_id")path: Int): retrofit2.Call<GetOrgTaskListResponse>
+
+    @PUT("/tasks/publish")
+    @NeedToken
+    fun publishTask(@Body body: Task): retrofit2.Call<TaskResponse>
+
+    @PUT("/tasks/{task_id}/accept")
+    @NeedToken
+    fun acceptTask(@Path("task_id") taskId: Int): retrofit2.Call<TaskResponse>
+
+    @PUT("/tasks/{task_id}/submit")
+    @NeedToken
+    fun submitTask(@Path("task_id") taskId: Int): retrofit2.Call<TaskResponse>
+
+    @PUT("/tasks/{task_id}/confirm")
+    @NeedToken
+    fun confirmTask(@Path("task_id") taskId: Int):retrofit2.Call<TaskResponse>
+
+    @PUT("/tasks/{task_id}/abandon")
+    @NeedToken
+    fun abandonTask(@Path("task_id") taskId: Int):retrofit2.Call<TaskResponse>
+
+    @DELETE("/tasks/{task_id}/delete")
+    @NeedToken
+    fun deleteTask(@Path("task_id") taskId: Int): retrofit2.Call<TaskResponse>
 }
 
 class TokenInterceptor(private val context: Context) : Interceptor {
@@ -78,7 +103,7 @@ class TokenInterceptor(private val context: Context) : Interceptor {
 }
 
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.1.130:5000/" // 替换为实际的服务器 API 基础 URL
+    private const val BASE_URL = Server.BASE_URL
 
     fun getInstance(context: Context): ApiService {
         val okHttpClient = OkHttpClient.Builder()
@@ -147,6 +172,36 @@ class ServerCommunicator private constructor(context: Context) {
 
     fun getOrgTaskList(path: Int, callback: Callback<GetOrgTaskListResponse>) {
         val call = apiService.getOrgTaskList(path)
+        call.enqueue(callback)
+    }
+
+    fun publishTask(body: Task, callback: Callback<TaskResponse>) {
+        val call = apiService.publishTask(body)
+        call.enqueue(callback)
+    }
+
+    fun acceptTask(taskId: Int, callback: Callback<TaskResponse>) {
+        val call = apiService.acceptTask(taskId)
+        call.enqueue(callback)
+    }
+
+    fun submitTask(taskId: Int, callback: Callback<TaskResponse>) {
+        val call = apiService.submitTask(taskId)
+        call.enqueue(callback)
+    }
+
+    fun confirmTask(taskId: Int, callback: Callback<TaskResponse>) {
+        val call = apiService.confirmTask(taskId)
+        call.enqueue(callback)
+    }
+
+    fun deleteTask(taskId: Int, callback: Callback<TaskResponse>) {
+        val call = apiService.deleteTask(taskId)
+        call.enqueue(callback)
+    }
+
+    fun abandonTask(taskId: Int, callback: Callback<TaskResponse>) {
+        val call = apiService.abandonTask(taskId)
         call.enqueue(callback)
     }
 }

@@ -30,7 +30,7 @@ class OrganizationDetailViewModel : ViewModel() {
     private val _taskList = MutableLiveData<ArrayList<Task>>()
     val taskList: LiveData<ArrayList<Task>> = _taskList
 
-    suspend fun loadTasks(context: android.content.Context) {
+    fun loadTasks(context: android.content.Context) {
         viewModelScope.launch(Dispatchers.IO) {
             var path: Int = -1
             _orgId.value?.let { path = it }
@@ -40,6 +40,7 @@ class OrganizationDetailViewModel : ViewModel() {
                     val body: GetOrgTaskListResponse? = response.body()
                     if (body != null) {
                         Timber.d(Gson().toJson(body))
+                        Timber.d(Gson().toJson(body.data))
                         _taskList.postValue(body.data)
                     }
                 }

@@ -41,7 +41,7 @@ class OrganizationFragment : Fragment(), OrganizationAdapter.OnItemClickListener
     private val binding get() = _binding!!
 
     private val viewModel: OrganizationViewModel by lazy {
-        ViewModelProvider(this).get(OrganizationViewModel::class.java)
+        ViewModelProvider(this)[OrganizationViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -140,9 +140,14 @@ class OrganizationFragment : Fragment(), OrganizationAdapter.OnItemClickListener
                 customDialog.dismiss()
                 return@setOnClickListener
             }
-            val orgInfo: OrganizationBaseInfo = OrganizationBaseInfo(id = orgId.toInt(), inviteCode = inviteCode)
-            viewModel.joinOrganization(requireContext(), orgId.toInt(), orgInfo)
-            Toast.makeText(requireContext(), "组织ID：${orgId}，邀请码：${inviteCode}", Toast.LENGTH_SHORT).show()
+            val orgInfo = OrganizationBaseInfo(id = orgId.toInt(), inviteCode = inviteCode)
+            viewModel.joinOrganization(requireContext(), orgId.toInt(), orgInfo) { isSuccess, msg ->
+                if (isSuccess) {
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                }
+            }
             customDialog.dismiss()
         }
 
@@ -199,11 +204,15 @@ class OrganizationFragment : Fragment(), OrganizationAdapter.OnItemClickListener
                 return@setOnClickListener
             }
 
-            Toast.makeText(requireContext(), "组织名：${name}，组织类型：${type}", Toast.LENGTH_SHORT).show()
-
             // 创建组织
             val orgInfo = OrganizationBaseInfo(0, name, type, "")
-            viewModel.createOrganization(requireContext(), orgInfo)
+            viewModel.createOrganization(requireContext(), orgInfo) { isSuccess, msg ->
+                if (isSuccess) {
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                }
+            }
             customDialog.dismiss()
         }
 
